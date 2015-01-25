@@ -1,5 +1,12 @@
 package
 {
+	import AppUI.Views.LSHelpView;
+	import AppUI.Views.LSIntroView;
+	import AppUI.Views.LSLessionMenuView;
+	import AppUI.Views.LSLessionView;
+	import AppUI.Views.LSMenuView;
+	import AppUI.Views.LSMessageBox;
+	
 	import CFramework.TooltipManager.TooltipController;
 	import CFramework.TooltipManager.TooltipView;
 	import CFramework.core.CCore;
@@ -13,7 +20,7 @@ package
 	import flash.net.URLRequest;
 	import flash.text.Font;
 	
-	[SWF( frameRate="24", width="836", height="640")]
+	[SWF( frameRate="24", width="842", height="576")]
 	public class PhanMemLichSu extends Sprite
 	{
 		private var _hlbCore:CCore;
@@ -42,7 +49,7 @@ package
 		protected function onInit():void
 		{
 			_hlbCore	=	new CCore();
-			_hlbCore.onInit( this, null, "media/swf/res.swf" );
+			_hlbCore.onInit( this, null, "debug/media/swf/res.swf" );
 			
 			_hlbCore.holder.holdVariable( CShareMacros.VAR_CONTAINER_TOPMOST, _container_topmost );
 			_hlbCore.holder.holdVariable( CShareMacros.VAR_CONTAINER_GAME, _gameContainer );
@@ -60,42 +67,47 @@ package
 			
 			_hlbCore.register( CShareMacros.VIEW_TOOLTIP, new TooltipView, null, new TooltipController );
 			_hlbCore.showView( CShareMacros.VIEW_TOOLTIP );
-//			
-//			_hlbCore.register( CShareMacros.HLB_VIEW, new GatoDecorateView(CShareMacros.HLB_VIEW) );
-//			_hlbCore.register( CShareMacros.HLB_MENU, new MenuView(CShareMacros.HLB_MENU) );
-//			_hlbCore.register( CShareMacros.HLB_TN, new TNView(CShareMacros.HLB_TN) );
-//			_hlbCore.showView( CShareMacros.HLB_MENU );
+			
+			_hlbCore.register( CShareMacros.LS_MESSAGEBOX, new LSMessageBox(CShareMacros.LS_MESSAGEBOX) );
+			
+			_hlbCore.register( CShareMacros.LS_INTRO, new LSIntroView(CShareMacros.LS_INTRO) );
+			_hlbCore.register( CShareMacros.LS_HELP, new LSHelpView(CShareMacros.LS_HELP) );
+			_hlbCore.register( CShareMacros.LS_MENU, new LSMenuView(CShareMacros.LS_MENU) );
+			_hlbCore.register( CShareMacros.LS_LESSIONS, new LSLessionView(CShareMacros.LS_LESSIONS) );
+			_hlbCore.register( CShareMacros.LS_LESSION_DETAIL, new LSLessionMenuView(CShareMacros.LS_LESSION_DETAIL) );
+			
+			_hlbCore.showView( CShareMacros.LS_INTRO );
 			
 			playSound();
 		}
 		
 		protected function loadFont():void
 		{
-			var cls:Class	=	Global.CoreGame.resourceManager.getClass( "UVN Banh Mi" );
-			if( cls )
-				Font.registerFont( cls );
+//			var cls:Class	=	Global.CoreGame.resourceManager.getClass( "UVN Banh Mi" );
+//			if( cls )
+//				Font.registerFont( cls );
 		}
 		
 		protected function playSound():void
 		{
-			var sound:Sound = new Sound();
-			var soundChannel:SoundChannel;
-			
-			sound.addEventListener(Event.COMPLETE, onSoundLoadComplete);
-			
-			sound.load( new URLRequest("media/swf/sound.mp3") );
-			
-			function onSoundLoadComplete(e:Event):void{
-				sound.removeEventListener(Event.COMPLETE, onSoundLoadComplete);
+//			var sound:Sound = new Sound();
+//			var soundChannel:SoundChannel;
+//			
+//			sound.addEventListener(Event.COMPLETE, onSoundLoadComplete);
+//			
+//			sound.load( new URLRequest("media/swf/sound.mp3") );
+//			
+//			function onSoundLoadComplete(e:Event):void{
+//				sound.removeEventListener(Event.COMPLETE, onSoundLoadComplete);
+////				soundChannel = sound.play();
+////				soundChannel.addEventListener(Event.SOUND_COMPLETE, onSoundChannelSoundComplete);
+//			}
+//			
+//			//  this is called when the sound channel completes.
+//			function onSoundChannelSoundComplete(e:Event):void{
+//				e.currentTarget.removeEventListener(Event.SOUND_COMPLETE, onSoundChannelSoundComplete);
 //				soundChannel = sound.play();
-//				soundChannel.addEventListener(Event.SOUND_COMPLETE, onSoundChannelSoundComplete);
-			}
-			
-			//  this is called when the sound channel completes.
-			function onSoundChannelSoundComplete(e:Event):void{
-				e.currentTarget.removeEventListener(Event.SOUND_COMPLETE, onSoundChannelSoundComplete);
-				soundChannel = sound.play();
-			}
+//			}
 		}
 	}
 }
