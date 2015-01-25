@@ -31,7 +31,7 @@
 			
 			_tf	=	new TextField();
 			
-			this.mouseEnabled	=	false;
+			this.mouseEnabled	=	true;
 			this.mouseChildren 	= 	false;
 			_tf.mouseEnabled	=	false;			
 			_tf.text			=	text;
@@ -117,6 +117,7 @@
 		public function set wrapWord( value:Boolean ):void
 		{
 			_tf.wordWrap=	value;
+			updateTextformat();
 		}
 		
 		public function set size( value : int ) : void
