@@ -1,11 +1,15 @@
 package
 {
+	import AppUI.Views.LSBTMenuView;
+	import AppUI.Views.LSDTView;
 	import AppUI.Views.LSHelpView;
 	import AppUI.Views.LSIntroView;
 	import AppUI.Views.LSLessionMenuView;
 	import AppUI.Views.LSLessionView;
 	import AppUI.Views.LSMenuView;
 	import AppUI.Views.LSMessageBox;
+	import AppUI.Views.LSTLView;
+	import AppUI.Views.LSTNView;
 	
 	import CFramework.TooltipManager.TooltipController;
 	import CFramework.TooltipManager.TooltipView;
@@ -75,8 +79,13 @@ package
 			_hlbCore.register( CShareMacros.LS_MENU, new LSMenuView(CShareMacros.LS_MENU) );
 			_hlbCore.register( CShareMacros.LS_LESSIONS, new LSLessionView(CShareMacros.LS_LESSIONS) );
 			_hlbCore.register( CShareMacros.LS_LESSION_DETAIL, new LSLessionMenuView(CShareMacros.LS_LESSION_DETAIL) );
+			_hlbCore.register( CShareMacros.LS_LESSION_BT_MENU, new LSBTMenuView(CShareMacros.LS_LESSION_BT_MENU) );
+			_hlbCore.register( CShareMacros.LS_LESSION_TN, new LSTNView(CShareMacros.LS_LESSION_TN) );
+			_hlbCore.register( CShareMacros.LS_LESSION_TL, new LSTLView(CShareMacros.LS_LESSION_TL) );
+			_hlbCore.register( CShareMacros.LS_LESSION_DT, new LSDTView(CShareMacros.LS_LESSION_DT) );
 			
 			_hlbCore.showView( CShareMacros.LS_INTRO );
+//			LSDTView.show( 1 );
 			
 			playSound();
 		}

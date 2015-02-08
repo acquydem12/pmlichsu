@@ -101,7 +101,6 @@ package AppUI.Views
 		protected override function onBackClicked(event:MouseEvent):void
 		{
 			changeView( CShareMacros.LS_LESSIONS, CShareMacros.LS_MENU, true, false );
-		}
-		
+		}		
 	}
 }

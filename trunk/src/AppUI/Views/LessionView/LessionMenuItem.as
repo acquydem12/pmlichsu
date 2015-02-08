@@ -1,5 +1,7 @@
 package AppUI.Views.LessionView
 {
+	import AppUI.Views.LSBTMenuView;
+	import AppUI.Views.LSDTView;
 	import AppUI.Views.LSLessionView;
 	import AppUI.Views.LSMenuView;
 	
@@ -77,15 +79,30 @@ package AppUI.Views.LessionView
 					break;
 				
 				case CShareMacros.LESSION_BAITAP:
-//					Global.CoreGame.showView( CShareMacros.LS_LESSIONS );
-//					(Global.CoreGame.holder.getView( CShareMacros.LS_LESSIONS )
-//						as LSMenuView).changeView( CShareMacros.LS_LESSIONS, CShareMacros.LS_LESSIONS, false, true );
+					
+					Global.CoreGame.showView( CShareMacros.LS_LESSION_BT_MENU );
+					( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_BT_MENU ) as 
+						LSBTMenuView ).parse( _index );
+					
+					( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_BT_MENU ) as 
+						LSBTMenuView ).moveIn( true, 
+						function():void
+						{
+							Global.CoreGame.hideView( CShareMacros.LS_LESSION_DETAIL );
+						});
 					break;
 				
 				case CShareMacros.LESSION_DOCTHEM:
-//					Global.CoreGame.showView( CShareMacros.LS_LESSIONS );
-//					(Global.CoreGame.holder.getView( CShareMacros.LS_LESSIONS )
-//						as LSMenuView).changeView( CShareMacros.LS_LESSIONS, CShareMacros.LS_LESSIONS, false, true );
+					Global.CoreGame.showView( CShareMacros.LS_LESSION_DT );
+					( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_DT ) as 
+						LSDTView ).parse( _index );
+					
+					( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_DT ) as 
+						LSDTView ).moveIn( true, 
+							function():void
+							{
+								Global.CoreGame.hideView( CShareMacros.LS_LESSION_DETAIL );
+							});
 					break;
 			}
 		}

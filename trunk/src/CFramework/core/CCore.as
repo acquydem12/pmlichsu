@@ -90,9 +90,14 @@ package CFramework.core
 		{
 			var view:CView = _holder.getView(identity);
 			var pContainer:DisplayObjectContainer = view.parentContainer;
-			if( pContainer )
+			if( view.parent )
 			{
-				view.parentContainer.removeChild(view);
+				view.parent.removeChild(view);
+				view.onHide();
+			} else if( view.parentContainer ){
+				try {
+					view.parentContainer.removeChild(view);
+				} catch( err:Error ) {}
 				view.onHide();
 			}
 		}
