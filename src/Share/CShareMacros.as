@@ -17,6 +17,10 @@ package Share
 		public static const LS_MENU:String 	=	"LS_MENU";
 		public static const LS_LESSIONS:String 	=	"LS_LESSIONS";
 		public static const LS_LESSION_DETAIL:String 	=	"LS_LESSION_DETAIL";
+		public static const LS_LESSION_BT_MENU:String 	=	"LS_LESSION_BT_MENU";
+		public static const LS_LESSION_TN:String 	=	"LS_LESSION_TN";
+		public static const LS_LESSION_TL:String 	=	"LS_LESSION_TL";
+		public static const LS_LESSION_DT:String 	=	"LS_LESSION_DT";
 		
 		public static const HLB_MENU:String = "HLB_MENU";
 		public static const HLB_VIEW:String = "HLB_VIEW";

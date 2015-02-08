@@ -86,6 +86,7 @@ package AppUI.Views
 			_btn_back.addEventListener( MouseEvent.CLICK, onBackClicked );
 			_btn_back.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
 			_btn_back.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
+			Global.CTTController.addTooltip( _btn_back, "Quay lại" );
 			
 			_btn_home	=	new CImageButton;
 			_btn_home.move( 380, 550 );
@@ -93,6 +94,7 @@ package AppUI.Views
 			_btn_home.addEventListener( MouseEvent.CLICK, onHomeClicked );
 			_btn_home.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
 			_btn_home.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
+			Global.CTTController.addTooltip( _btn_home, "Menu" );
 			
 			_btn_sound	=	new CImageButton;
 			_btn_sound.move( 440, 550 );
@@ -100,6 +102,7 @@ package AppUI.Views
 			_btn_sound.addEventListener( MouseEvent.CLICK, onSoundClicked );
 			_btn_sound.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
 			_btn_sound.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
+			Global.CTTController.addTooltip( _btn_sound, "Âm thanh" );
 			
 			_btn_help	=	new CImageButton;
 			_btn_help.move( 500, 550 );
@@ -107,6 +110,7 @@ package AppUI.Views
 			_btn_help.addEventListener( MouseEvent.CLICK, onHelpClicked );
 			_btn_help.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
 			_btn_help.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
+			Global.CTTController.addTooltip( _btn_help, "Trợ giúp" );
 			
 			// Load resources
 			var backClass:Class		=	_core.resourceManager.getClass( "btn_back" );
