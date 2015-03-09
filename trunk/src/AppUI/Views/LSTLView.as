@@ -20,7 +20,7 @@ package AppUI.Views
 	{
 		private var _bg:CImage;
 		private var _title:CImage;
-		private var _lblTitle:CLabel;
+		private var _titleName:CImage;
 		
 		private var _footer:CImage;
 		private var _subBg:CImage;
@@ -38,6 +38,8 @@ package AppUI.Views
 		private var _data:Object;
 		
 		private var _editor:DemoTextEditor;
+		
+		private var _btnDapAn:CImageButton;
 		
 		public function LSTLView(identify:String)
 		{
@@ -79,12 +81,14 @@ package AppUI.Views
 			if( titleClass )
 				_title.source	=	new Bitmap( new titleClass );
 			
-			_lblTitle	=	new CLabel;
-			_lblTitle.size	=	22;
-			_lblTitle.color	=	0x0;
-			_lblTitle.text	=	"ĐỀ BÀI";
-			_lblTitle.move( 452, 3 );
-			addChild( _lblTitle );
+			_titleName	=	new CImage;
+			_titleName.move( 445, 2 );
+			_titleName.scaleX	=	0.9;
+			_titleName.scaleY	=	0.9;
+			addChild( _titleName );
+			var titleNameClass:Class	=	_core.resourceManager.getClass( "DB" );
+			if( titleNameClass )
+				_titleName.source		=	new Bitmap( new titleNameClass );
 			
 			_footer		=	new CImage;
 			_footer.move( 0, 576 - 62 );
@@ -105,14 +109,16 @@ package AppUI.Views
 			_workingSpace.color	=	0xffffff;
 			_workingSpace.text	=	"BÀI LÀM";
 			_workingSpace.rotationZ	=	-90;
+			_workingSpace.setFont( "Myriad Pro Cond", true );
 			_workingSpace.move( 185, 400 );
 			addChild( _workingSpace );
 			
 			_lblQuestion	=	new CLabel;
-			_lblQuestion.size	=	20;
+			_lblQuestion.size	=	18;
 			_lblQuestion.color	=	0x0;
 			_lblQuestion.wrapWord	=	true;
-			_lblQuestion.setSize( 500, 100 );
+			_lblQuestion.setFont( "UVN Bach Dang", true );
+			_lblQuestion.setSize( 480, 100 );
 			_lblQuestion.move( 248, 50 );
 			addChild( _lblQuestion );
 			
@@ -136,16 +142,40 @@ package AppUI.Views
 			_editor		=	new DemoTextEditor();
 			addChild( _editor );
 			
-//			var flagClass:Class	=	_core.resourceManager.getClass( "flag_tluan" );
-//			if( flagClass )
-//			{
-//				_flag_tl	=	new flagClass;
-//				addChild( _flag_tl );
-//			}
+			_btnDapAn	=	new CImageButton;
+			_btnDapAn.move( 785, 270 );
+			addChild( _btnDapAn );
+			_btnDapAn.addEventListener( MouseEvent.CLICK, onDapanClicked );
+			var btnDAClass:Class	=	_core.resourceManager.getClass( "btnDapAn" );
+			if( btnDAClass )
+			{
+				_btnDapAn.upSkin	=	new Bitmap( new btnDAClass );
+			}
+			
+			var flagClass:Class	=	_core.resourceManager.getClass( "flagTL" );
+			if( flagClass )
+			{
+				_flag_tl	=	new flagClass;
+				_flag_tl.x	=	0;
+				_flag_tl.y	=	40;
+				addChild( _flag_tl );
+			}
 			
 			_questions	=	new Vector.<ButtonTLQuestion>;
 			
 			createButtonBar();
+		}
+		
+		protected function onDapanClicked( event:MouseEvent ):void
+		{
+			if( _editor.getTextTyped() == "" )
+			{
+				LSMessageBox.show( "\n\nBạn phải trả lời câu hỏi mới có thể xem đáp án !" );
+			}
+			else 
+			{
+				LSDAView.show( _data[_current.getIndex()].ans );
+			}
 		}
 		
 		protected function onNext( event:MouseEvent ):void
@@ -206,7 +236,12 @@ package AppUI.Views
 				{
 					_questions[i].parse( index );
 					if( i == 0 )
+					{
+						_current	=	_questions[i];
 						_lblQuestion.text	=	_data[index].q;
+						_questions[i].highLight();
+					}
+					else _questions[i].unHighLight();
 					
 					_questions[i].visible	=	true;
 				} else {
@@ -217,6 +252,7 @@ package AppUI.Views
 		
 		protected function removeAllButton():void
 		{
+			_current	=	null;
 			for( var i:uint = 0; i < _questions.length; ++i )
 			{
 				_questions[i].removeEventListener( MouseEvent.CLICK, onQuestionClicked );
@@ -227,6 +263,7 @@ package AppUI.Views
 				_questions.splice( 0, _questions.length );
 		}
 		
+		private var _current:ButtonTLQuestion;
 		protected function onQuestionClicked( event:MouseEvent ):void
 		{
 			for( var i:uint = 0; i < _questions.length; ++i )
@@ -234,6 +271,7 @@ package AppUI.Views
 			
 			( event.currentTarget as ButtonTLQuestion).highLight();
 			
+			_current	=	( event.currentTarget as ButtonTLQuestion);
 			_lblQuestion.text	=	_data[( event.currentTarget as ButtonTLQuestion).getIndex()].q;
 			
 			event.stopImmediatePropagation();
@@ -241,7 +279,7 @@ package AppUI.Views
 		
 		protected override function getHelpMessage():String
 		{
-			return "Chọn câu hỏi và trả lời vào ô bên dưới";
+			return "Chọn câu hỏi và trả lời vào ô bên dưới\n\nBạn phải trả lời câu hỏi mới có thể xem đáp án";
 		}
 		
 		protected override function onBackClicked(event:MouseEvent):void

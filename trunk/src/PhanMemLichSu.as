@@ -1,6 +1,9 @@
 package
 {
+	import AppUI.Views.LSBHView;
 	import AppUI.Views.LSBTMenuView;
+	import AppUI.Views.LSDAView;
+	import AppUI.Views.LSDTSubView;
 	import AppUI.Views.LSDTView;
 	import AppUI.Views.LSHelpView;
 	import AppUI.Views.LSIntroView;
@@ -55,6 +58,8 @@ package
 			_hlbCore	=	new CCore();
 			_hlbCore.onInit( this, null, "debug/media/swf/res.swf" );
 			
+			_hlbCore.holder.holdVariable( CShareMacros.VAR_APP_WIDTH, 842 );
+			_hlbCore.holder.holdVariable( CShareMacros.VAR_APP_HEIGHT, 576 );
 			_hlbCore.holder.holdVariable( CShareMacros.VAR_CONTAINER_TOPMOST, _container_topmost );
 			_hlbCore.holder.holdVariable( CShareMacros.VAR_CONTAINER_GAME, _gameContainer );
 			
@@ -73,28 +78,41 @@ package
 			_hlbCore.showView( CShareMacros.VIEW_TOOLTIP );
 			
 			_hlbCore.register( CShareMacros.LS_MESSAGEBOX, new LSMessageBox(CShareMacros.LS_MESSAGEBOX) );
+			_hlbCore.register( CShareMacros.LS_DAVIEW, new LSDAView(CShareMacros.LS_DAVIEW) );
 			
 			_hlbCore.register( CShareMacros.LS_INTRO, new LSIntroView(CShareMacros.LS_INTRO) );
 			_hlbCore.register( CShareMacros.LS_HELP, new LSHelpView(CShareMacros.LS_HELP) );
-			_hlbCore.register( CShareMacros.LS_MENU, new LSMenuView(CShareMacros.LS_MENU) );
-			_hlbCore.register( CShareMacros.LS_LESSIONS, new LSLessionView(CShareMacros.LS_LESSIONS) );
+//			_hlbCore.register( CShareMacros.LS_MENU, new LSMenuView(CShareMacros.LS_MENU) );
+			
 			_hlbCore.register( CShareMacros.LS_LESSION_DETAIL, new LSLessionMenuView(CShareMacros.LS_LESSION_DETAIL) );
 			_hlbCore.register( CShareMacros.LS_LESSION_BT_MENU, new LSBTMenuView(CShareMacros.LS_LESSION_BT_MENU) );
 			_hlbCore.register( CShareMacros.LS_LESSION_TN, new LSTNView(CShareMacros.LS_LESSION_TN) );
 			_hlbCore.register( CShareMacros.LS_LESSION_TL, new LSTLView(CShareMacros.LS_LESSION_TL) );
 			_hlbCore.register( CShareMacros.LS_LESSION_DT, new LSDTView(CShareMacros.LS_LESSION_DT) );
+			_hlbCore.register( CShareMacros.LS_LESSION_DT_DETAIL, new LSDTSubView(CShareMacros.LS_LESSION_DT_DETAIL) );
+			_hlbCore.register( CShareMacros.LS_LESSION_BH, new LSBHView(CShareMacros.LS_LESSION_BH) );
 			
 			_hlbCore.showView( CShareMacros.LS_INTRO );
+//			LSTNView.show( 17 );
 //			LSDTView.show( 1 );
+//			LSBHView.show( 17 );
 			
 			playSound();
 		}
 		
 		protected function loadFont():void
 		{
-//			var cls:Class	=	Global.CoreGame.resourceManager.getClass( "UVN Banh Mi" );
-//			if( cls )
-//				Font.registerFont( cls );
+			var courier:Class	=	Global.CoreGame.resourceManager.getClass( "CourierNew" );
+			var myriad:Class	=	Global.CoreGame.resourceManager.getClass( "MyriadPro" );
+			var bachdang:Class	=	Global.CoreGame.resourceManager.getClass( "UVNBachDang" );
+			var unicorn:Class	=	Global.CoreGame.resourceManager.getClass( "Unicorn Regular" );
+			var victorian:Class	=	Global.CoreGame.resourceManager.getClass( "Victorian" );
+			
+			Font.registerFont( courier );
+			Font.registerFont( myriad );
+			Font.registerFont( bachdang );
+			Font.registerFont( unicorn );
+			Font.registerFont( victorian );
 		}
 		
 		protected function playSound():void

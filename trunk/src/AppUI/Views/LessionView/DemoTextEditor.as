@@ -27,10 +27,14 @@ package AppUI.Views.LessionView
 			addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 		}
 		
+		public function getTextTyped():String
+		{
+			return _textField.text;
+		}
+		
 		protected function onKeyUp( event:KeyboardEvent ):void
 		{
 			_textField.text	=	(event.target as TextField).text;
-			trace( _textField.text );
 		}
 	}
 }

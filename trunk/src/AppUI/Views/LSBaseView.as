@@ -80,24 +80,24 @@ package AppUI.Views
 		
 		protected function createButtonBar():void
 		{
-			_btn_back	=	new CImageButton;
-			_btn_back.move( 320, 550 );
-			addChild( _btn_back );
-			_btn_back.addEventListener( MouseEvent.CLICK, onBackClicked );
-			_btn_back.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
-			_btn_back.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
-			Global.CTTController.addTooltip( _btn_back, "Quay lại" );
-			
 			_btn_home	=	new CImageButton;
-			_btn_home.move( 380, 550 );
+			_btn_home.move( 350, 550 );
 			addChild( _btn_home );
 			_btn_home.addEventListener( MouseEvent.CLICK, onHomeClicked );
 			_btn_home.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
 			_btn_home.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
 			Global.CTTController.addTooltip( _btn_home, "Menu" );
 			
+			_btn_back	=	new CImageButton;
+			_btn_back.move( 400, 550 );
+			addChild( _btn_back );
+			_btn_back.addEventListener( MouseEvent.CLICK, onBackClicked );
+			_btn_back.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
+			_btn_back.addEventListener( MouseEvent.ROLL_OUT, onButtonHandler );
+			Global.CTTController.addTooltip( _btn_back, "Quay lại" );
+			
 			_btn_sound	=	new CImageButton;
-			_btn_sound.move( 440, 550 );
+			_btn_sound.move( 450, 550 );
 			addChild( _btn_sound );
 			_btn_sound.addEventListener( MouseEvent.CLICK, onSoundClicked );
 			_btn_sound.addEventListener( MouseEvent.ROLL_OVER, onButtonHandler );
@@ -154,7 +154,7 @@ package AppUI.Views
 		
 		private function onHomeClicked( event:MouseEvent ):void
 		{	
-			changeView( _identify, CShareMacros.LS_MENU, true, false );
+			changeView( _identify, CShareMacros.LS_LESSION_DETAIL, true, false );
 		}
 		
 		protected function disableSoundClicked():void

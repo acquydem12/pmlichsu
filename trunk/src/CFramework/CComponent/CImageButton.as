@@ -339,9 +339,6 @@ package CFramework.CComponent
 				
 				_isMouseOver	=	true;
 				
-//				if ( isHighlight )
-//					filters		=	FilterEffect.createStrokeFilter( 0xffffff, 5.0, 5.0, 5.0 );
-				
 				addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			}
 		}
@@ -472,15 +469,36 @@ package CFramework.CComponent
 	
 		public function disable( callBack:Function ):void
 		{
+			if( !disableSkin )
+			{
+				filters	=	FilterEffect.createBackWhiteImage();
+			} else
+			{
+				copyProperties( _disableSkin );
+				drawFace( _disableSkin );
+				if( stage )
+				{
+					stage.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				}
+			}
 			enabled	=	false;
-			filters	=	FilterEffect.createBackWhiteImage();
 			removeEventListener(MouseEvent.CLICK, callBack);
 		}
 		
 		public function enable( callBack:Function ):void
 		{
+			if( !disableSkin )
+			{
+				filters	=	null;
+			} else {
+				copyProperties( _upSkin );
+				drawFace( _upSkin );
+				if( stage )
+				{
+					stage.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				}
+			}
 			enabled	=	true;
-			filters	=	null;
 			addEventListener(MouseEvent.CLICK, callBack);
 		}
 	}

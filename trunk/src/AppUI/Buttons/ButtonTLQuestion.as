@@ -19,7 +19,8 @@ package AppUI.Buttons
 				upSkin	=	new Bitmap( new upSkinClass );
 			
 			labelPtr.size	=	22;
-			labelPtr.color	=	0x0;
+			labelPtr.color	=	0x91734f;
+			labelPtr.setFont( "Unicorn Regular", true );
 			
 			addEvent();
 		}
@@ -49,14 +50,14 @@ package AppUI.Buttons
 		
 		public function highLight():void
 		{
-			labelPtr.color	=	0x0083ce;
+			labelPtr.color	=	0x603a18;
 			
 			dispose();
 		}
 		
 		public function unHighLight():void
 		{
-			labelPtr.color	=	0x0;
+			labelPtr.color	=	0x91734f;
 			
 			addEvent();
 		}
@@ -67,12 +68,12 @@ package AppUI.Buttons
 			{
 				case MouseEvent.ROLL_OVER:
 					filters		=	FilterEffect.createStrokeFilter( 0xffffff, 4, 4, 4 );
-					labelPtr.color	=	0x0083ce;
+					labelPtr.color	=	0x603a18;
 					break;
 				
 				case MouseEvent.ROLL_OUT:
 					filters		=	null;
-					labelPtr.color	=	0x0;
+					labelPtr.color	=	0x91734f;
 					break;
 			}
 		}

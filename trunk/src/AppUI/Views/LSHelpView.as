@@ -53,7 +53,9 @@ package AppUI.Views
 			switch( event.type )
 			{
 				case MouseEvent.CLICK:
-					changeView( CShareMacros.LS_HELP, CShareMacros.LS_MENU, false, true );
+					LSLessionMenuView.show( 0 );
+					(Global.CoreGame.holder.getView( CShareMacros.LS_HELP )
+						as LSHelpView).changeView( CShareMacros.LS_HELP, CShareMacros.LS_LESSION_DETAIL, false, true );
 					break;
 				
 				case MouseEvent.ROLL_OVER:
