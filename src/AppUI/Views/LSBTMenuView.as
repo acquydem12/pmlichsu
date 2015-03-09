@@ -108,7 +108,7 @@ package AppUI.Views
 			if( cl1 )
 			{
 				_cloud1		=	new cl1;
-				_cloud1.x	=	350;
+				_cloud1.x	=	370;
 				_cloud1.y	=	320;
 				addChild( _cloud1 );
 			}
@@ -126,7 +126,7 @@ package AppUI.Views
 			if( cl3 )
 			{
 				_cloud3		=	new cl3;
-				_cloud3.x	=	290;
+				_cloud3.x	=	320;
 				_cloud3.y	=	320;
 				addChild( _cloud3 );
 			}
@@ -158,11 +158,25 @@ package AppUI.Views
 		protected function onTLClicked( event:MouseEvent ):void
 		{
 			LSTLView.show( _index );
+			
+			( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_TL ) as 
+				LSTLView ).moveIn( true, 
+					function():void
+					{
+						LSBTMenuView.hide();
+					});
 		}
 		
 		protected function onTNClicked( event:MouseEvent ):void
 		{
 			LSTNView.show( _index );
+			
+			( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_TN ) as 
+				LSTNView ).moveIn( true, 
+					function():void
+					{
+						LSBTMenuView.hide();
+					});
 		}
 		
 		protected override function onBackClicked(event:MouseEvent):void

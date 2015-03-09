@@ -1,5 +1,6 @@
 package AppUI.Views.LessionView
 {
+	import AppUI.Views.LSBHView;
 	import AppUI.Views.LSBTMenuView;
 	import AppUI.Views.LSDTView;
 	import AppUI.Views.LSLessionView;
@@ -14,6 +15,7 @@ package AppUI.Views.LessionView
 	import com.greensock.layout.AlignMode;
 	
 	import flash.display.Bitmap;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
@@ -23,10 +25,16 @@ package AppUI.Views.LessionView
 	{
 		private var _bg:CImage;
 		
-		private var _lblText:CLabel;
+		private var _img:CImage;
 		
 		private var _index:uint;
 		private var _text:String;
+		
+		private static const map:Object	=	{
+			"BÀI TẬP":"BT",
+			"BÀI HỌC":"BH",
+			"ĐỌC THÊM":"DT"
+		};
 		
 		public function LessionMenuItem( text:String )
 		{
@@ -34,27 +42,29 @@ package AppUI.Views.LessionView
 			
 			this._text	=	text;
 			
+			buttonMode	=	true;
+			
 			_bg	=	new CImage;
 			addChild( _bg );
 			
-			_lblText	=	new CLabel;
-			_lblText.size	=	20;
-			_lblText.setSize( 165, 150 );
-			_lblText.text	=	text;
-			_lblText.bold	=	true;
-			_lblText.color	=	0xffffff;
-			_lblText.align	=	AlignMode.CENTER;
-			_lblText.move( -5, 50 );
-			_lblText.buttonMode		=	true;
-			addChild( _lblText );
+			_img	=	new CImage;
+			_img.mouseEnabled	=	false;
+			addChild( _img );
 			
 			var bgClass:Class	=	Global.CoreGame.resourceManager.getClass( "sl5_circle" );
 			if( bgClass )
+			{
 				_bg.source	=	new bgClass;
+				(_bg.source as MovieClip).stop();
+			}
+			var cls:Class	=	Global.CoreGame.resourceManager.getClass( map[text] );
+			if( cls )
+			{
+				_img.source	=	new Bitmap( new cls );
+				_img.move( 45 + ((61 - _img.width) < 0 ? -10 : 0), 42 );
+			}
 			
 			addEventListener( MouseEvent.CLICK, onClicked );
-			_lblText.addEventListener( MouseEvent.ROLL_OVER, onTextHandler );
-			_lblText.addEventListener( MouseEvent.ROLL_OUT, onTextHandler );
 		}
 		
 		public function parse( index:uint ):void
@@ -73,13 +83,17 @@ package AppUI.Views.LessionView
 			switch( _text )
 			{
 				case CShareMacros.LESSION_BAIHOC:
-//					Global.CoreGame.showView( CShareMacros.LS_LESSIONS );
-//					(Global.CoreGame.holder.getView( CShareMacros.LS_LESSIONS )
-//						as LSMenuView).changeView( CShareMacros.LS_LESSIONS, CShareMacros.LS_LESSIONS, false, true );
+					LSBHView.show( _index );
+					
+					( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_BH ) as 
+						LSBHView ).moveIn( true, 
+							function():void
+							{
+								Global.CoreGame.hideView( CShareMacros.LS_LESSION_DETAIL );
+							});
 					break;
 				
 				case CShareMacros.LESSION_BAITAP:
-					
 					Global.CoreGame.showView( CShareMacros.LS_LESSION_BT_MENU );
 					( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_BT_MENU ) as 
 						LSBTMenuView ).parse( _index );
@@ -103,20 +117,6 @@ package AppUI.Views.LessionView
 							{
 								Global.CoreGame.hideView( CShareMacros.LS_LESSION_DETAIL );
 							});
-					break;
-			}
-		}
-		
-		protected function onTextHandler( event:MouseEvent ):void
-		{	
-			switch( event.type )
-			{
-				case MouseEvent.ROLL_OVER:
-					_lblText.underline	=	true;
-					break;
-				
-				case MouseEvent.ROLL_OUT:
-					_lblText.underline	=	false;
 					break;
 			}
 		}

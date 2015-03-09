@@ -34,7 +34,7 @@ package AppUI.Views
 			addChild( _bg );
 			
 			_btnStart	=	new CImageButton;
-			_btnStart.move( 650, 460 );
+			_btnStart.move( 650, 445 );
 			_btnStart.addEventListener( MouseEvent.CLICK, onStartHandler );
 			_btnStart.addEventListener( MouseEvent.ROLL_OVER, onStartHandler );
 			_btnStart.addEventListener( MouseEvent.ROLL_OUT, onStartHandler );
@@ -45,6 +45,7 @@ package AppUI.Views
 			_lblHelp.setSize( 300, 30 );
 			_lblHelp.text	=	"Click xem hướng dẫn sử dụng";
 			_lblHelp.move( 150, 430 );
+			_lblHelp.setFont( "Myriad Pro Cond", true );
 			_lblHelp.color	=	0xffffff;
 			_lblHelp.addEventListener( MouseEvent.CLICK, onHelpHandler );
 			_lblHelp.addEventListener( MouseEvent.ROLL_OVER, onHelpHandler );
@@ -65,7 +66,9 @@ package AppUI.Views
 			switch( event.type )
 			{
 				case MouseEvent.CLICK:
-					_core.showView( CShareMacros.LS_MENU );
+					LSLessionMenuView.show( 0 );
+					(Global.CoreGame.holder.getView( CShareMacros.LS_INTRO )
+						as LSIntroView).changeView( CShareMacros.LS_INTRO, CShareMacros.LS_LESSION_DETAIL, false, true );
 					break;
 				
 				case MouseEvent.ROLL_OVER:

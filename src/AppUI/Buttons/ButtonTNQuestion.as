@@ -8,25 +8,31 @@ package AppUI.Buttons
 	
 	public class ButtonTNQuestion extends CLabelButton
 	{
+		private var _order:uint;
 		private var _index:uint;
 		
-		public function ButtonTNQuestion(index:uint)
+		public function ButtonTNQuestion(order:uint, index:uint)
 		{
 			super(true);
 			
+			_order		=	order;
 			_index		=	index;
 			
 			var upSkinClass:Class	=	Global.CoreGame.resourceManager.getClass( "question_bg" );
 			if( upSkinClass )
 				upSkin	=	new Bitmap( new upSkinClass );
 			
-			title	=	String( index );
-//			setLblDown( 2, 2 );
-//			setLblNormal( -77.5, -24 );
+			title	=	String( order );
 			labelPtr.size	=	22;
-			labelPtr.color	=	0x0;
+			labelPtr.color	=	0x91734f;
+			labelPtr.setFont( "Unicorn Regular", true );
 			
 			addEvent();
+		}
+		
+		public function getOrder():uint
+		{
+			return _order;
 		}
 		
 		public function getIndex():uint
@@ -48,14 +54,14 @@ package AppUI.Buttons
 		
 		public function highLight():void
 		{
-			labelPtr.color	=	0x0083ce;
+			labelPtr.color	=	0x603a18;
 			
 			dispose();
 		}
 		
 		public function unHighLight():void
 		{
-			labelPtr.color	=	0x0;
+			labelPtr.color	=	0x91734f;
 			
 			addEvent();
 		}
@@ -66,12 +72,12 @@ package AppUI.Buttons
 			{
 				case MouseEvent.ROLL_OVER:
 					filters		=	FilterEffect.createStrokeFilter( 0xffffff, 4, 4, 4 );
-					labelPtr.color	=	0x0083ce;
+					labelPtr.color	=	0x603a18;
 					break;
 				
 				case MouseEvent.ROLL_OUT:
 					filters		=	null;
-					labelPtr.color	=	0x0;
+					labelPtr.color	=	0x91734f;
 					break;
 			}
 		}

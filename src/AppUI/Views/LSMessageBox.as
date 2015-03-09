@@ -3,6 +3,7 @@ package AppUI.Views
 	import CFramework.CComponent.CImage;
 	import CFramework.CComponent.CImageButton;
 	import CFramework.CComponent.CLabel;
+	import CFramework.CComponent.CScrollbarComponent;
 	
 	import Share.CShareMacros;
 	
@@ -11,6 +12,7 @@ package AppUI.Views
 	import flash.display.Bitmap;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
 
 	public class LSMessageBox extends LSBaseView
 	{
@@ -57,14 +59,14 @@ package AppUI.Views
 			parentContainer	=	host;
 			
 			_bg	=	new CImage;
-			_bg.move( 140, 150 );
+			_bg.move( 230, 150 );
 			addChild( _bg );
-			var bgClass:Class		=	_core.resourceManager.getClass( "help_bg" );
+			var bgClass:Class		=	_core.resourceManager.getClass( "msgbox" );
 			if( bgClass )
 				_bg.source			=	new Bitmap( new bgClass );
 			
 			_btn_quit	=	new CImageButton;
-			_btn_quit.move( 694, 160 );
+			_btn_quit.move( 602, 157 );
 			_btn_quit.addEventListener( MouseEvent.CLICK, onStartHandler );
 			_btn_quit.addEventListener( MouseEvent.ROLL_OVER, onStartHandler );
 			_btn_quit.addEventListener( MouseEvent.ROLL_OUT, onStartHandler );
@@ -75,10 +77,11 @@ package AppUI.Views
 			
 			_lblMessage	=	new CLabel;
 			_lblMessage.size	=	18;
-			_lblMessage.setSize( 500, 200 );
-			_lblMessage.move( 180, 180 );
+			_lblMessage.setSize( 350, 200 );
+			_lblMessage.move( 245, 180 );
 			_lblMessage.color	=	0x0;
 			_lblMessage.bold	=	true;
+			_lblMessage.setFont( "UVN Bach Dang", true );
 			_lblMessage.wrapWord	=	true;
 			addChild( _lblMessage );
 		}
@@ -86,6 +89,17 @@ package AppUI.Views
 		public function parse( message:String ):void
 		{
 			_lblMessage.text	=	message;
+		}
+		
+		public function parseWithScrollbar( message:String ):void
+		{
+			_lblMessage.text	=	message;
+			var face:CImage		=	new CImage;
+			var faceClass:Class	=	Global.CoreGame.resourceManager.getClass( "DB" );
+			face.source			=	new Bitmap( new faceClass );
+			
+			var myScroller:CScrollbarComponent = new CScrollbarComponent(_lblMessage, _lblMessage.width, 100, face, "vertical");
+			addChild( myScroller );
 		}
 		
 		protected function onStartHandler( event:MouseEvent ):void

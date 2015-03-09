@@ -15,7 +15,7 @@
 	{
 		private var _color : int			=	0x888888;
 		private var _textSize : int			=	13;
-		private var _textFont : String		=	"Helvetica";
+		private var _textFont : String		=	"Times New Roman";
 		private var _embedFont : Boolean	=	false;
 		private var _bold : Boolean			=	false;
 		private var _italic : Boolean		=	false;
@@ -49,7 +49,7 @@
 		
 		public function setFont_default() : void
 		{
-			_textFont	=	"Helvetica";
+			_textFont	=	"Times New Roman";
 			_embedFont	=	false;
 			updateTextformat();
 		}

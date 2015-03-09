@@ -81,7 +81,7 @@ package AppUI.Views
 			for( var str:String in JSONData.LessionData )
 			{
 				var data:Object	=	JSONData.LessionData[str];
-				var lession:LessionItem	=	new LessionItem( data.index, data.text, data.color, this );
+				var lession:LessionItem	=	new LessionItem( data.index, String( data.index ), data.text, data.color, this );
 				lession.x		=	70 + int(count%2) * 400;
 				lession.y		=	150 + int(count/2) * 100;
 				count++;

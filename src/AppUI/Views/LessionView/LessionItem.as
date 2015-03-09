@@ -6,6 +6,8 @@ package AppUI.Views.LessionView
 	
 	import Share.CShareMacros;
 	
+	import com.greensock.layout.AlignMode;
+	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
@@ -18,7 +20,7 @@ package AppUI.Views.LessionView
 		private var _index:uint;
 		private var _listener:ILessionListener;
 		
-		public function LessionItem( index:uint, text:String, color:int, listener:ILessionListener )
+		public function LessionItem( index:uint, indexStr:String, text:String, color:int, listener:ILessionListener )
 		{
 			super();
 			
@@ -27,22 +29,24 @@ package AppUI.Views.LessionView
 			this._color		=	color;
 			
 			_lblIndex	=	new CLabel;
-			_lblIndex.size	=	100;
-			_lblIndex.setSize( 165, 150 );
-			_lblIndex.text	=	String( _index );
+			_lblIndex.size	=	35;
+			_lblIndex.setSize( 45, 80 );
+			_lblIndex.text	=	indexStr;
 			_lblIndex.bold	=	true;
 			_lblIndex.color	=	color;
+			_lblIndex.align	=	AlignMode.CENTER;
 			_lblIndex.buttonMode		=	true;
 			addChild( _lblIndex );
-				
+			
 			_lblText	=	new CLabel;
-			_lblText.size	=	18;
-			_lblText.setSize( 200, 300 );
+			_lblText.size	=	16;
+			_lblText.setSize( 150, 150 );
 			_lblText.bold	=	true;
 			_lblText.color	=	color;
-			_lblText.wrapWord		=	true;
+			_lblText.wrapWord	=	true;
 			_lblText.text	=	text;
-			_lblText.move( 60, 30 );
+			_lblText.move( 50, 0 );
+			_lblText.setFont( "Myriad Pro Cond", true );
 			_lblText.buttonMode		=	true;
 			addChild( _lblText );
 			
@@ -61,20 +65,17 @@ package AppUI.Views.LessionView
 			_lblText.color	=	0x0;
 		}
 		
+		public function dispose():void
+		{
+			removeEventListener( MouseEvent.CLICK, onClicked );
+		}
+		
 		protected function onClicked( event:MouseEvent ):void
 		{
 			if( _listener )
 			{
 				_listener.onClicked( _index );
 				highLight();
-				
-				Global.CoreGame.showView( CShareMacros.LS_LESSION_DETAIL );
-				( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_DETAIL ) as LSLessionMenuView ).parse( _index );
-				( Global.CoreGame.holder.getView( CShareMacros.LS_LESSION_DETAIL ) as LSLessionMenuView ).moveIn( true, 
-					function():void
-					{
-						Global.CoreGame.hideView( CShareMacros.LS_LESSIONS );
-					});
 			}
 		}
 	}
